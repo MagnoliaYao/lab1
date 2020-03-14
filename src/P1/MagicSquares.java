@@ -11,14 +11,20 @@ import java.util.Scanner;
 *    1.3  数字之间分隔符是不是\t
 * */
 public class MagicSquares {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws IOException {
         for (int i = 1; i <= 5; i++) {
             boolean Answer = isLegalMagicSquare(i + ".txt");
             System.out.println(Answer);
         }
-
-        //System.out.println(txt);
-
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        while (n <= 0 || n % 2 == 0) {
+            System.out.println("Input Wrong");
+            n = sc.nextInt();
+        }
+        generateMagicSquare(n);
+        System.out.println("6" + " " + String.valueOf(isLegalMagicSquare("src/P1/txt/" + "6" + ".txt")));
+        return;
     }
 
     public static boolean isLegalMagicSquare(String fileName) {
@@ -47,11 +53,11 @@ public class MagicSquares {
         int array[][] = new int[length][width];
         for (int i = 0; i < length; i++) {
             if (arrayList.get(i).split(" ") != null) {
-                System.out.println("使用非法分隔符");
+                System.out.println("不是幻方");
                 return false;
             }
                 if (arrayList.get(i).split("-") != null || arrayList.get(i).split("\\.") != null) {
-                    System.out.println("数字并非正整数");
+                    System.out.println("不是幻方");
                     return false;
                 }
         }
@@ -62,7 +68,7 @@ public class MagicSquares {
             }
         }
         if(length!=width){
-            System.out.println("行列数不相同");
+            System.out.println("不是幻方");
             return false;
         }
 
@@ -91,7 +97,7 @@ public class MagicSquares {
        return true;
     }
 
-    public static boolean generateMagicSquare(int n) {
+    public static boolean generateMagicSquare(int n) throws IOException {
         int magic[][] = new int[n][n];
         int row = 0, col = n / 2, i, j, square = n * n;
         for (i = 1; i <= square; i++) {
@@ -109,11 +115,15 @@ public class MagicSquares {
                     col++;
             }
         }
+        File file = new File("src/P1/txt/6.txt");
+        PrintWriter output = new PrintWriter(file);
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++)
-                System.out.print(magic[i][j] + "\t");
-            System.out.println();
+                output.print(magic[i][j] + "\t");
+            output.println();
         }
+        output.close();
         return true;
     }
+
 }

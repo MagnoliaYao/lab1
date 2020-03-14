@@ -148,7 +148,7 @@ public class TurtleSoup {
 //    	Iterator<Point> it = points.iterator();
         if(!points.isEmpty())
         {
-            //元素小于3个时，必是凸包直接返回
+            //元素小于3个时一定是凸包
             if(points.size() <=3)
                 return points;
 
@@ -168,9 +168,9 @@ public class TurtleSoup {
                 }
             }
 
-            shellPoint.add(minPoint); //最左下元素定时凸包元素，加入集合
+            shellPoint.add(minPoint);
             nowPoint = minPoint;
-            preBearing = 0; //之前凸包元素指向最近凸包元素的角度（相对与y轴顺时针）
+            preBearing = 0; //指向最近凸包元素的角度（y轴顺时针）
             while(true)
             {
                 nextBearing = 360;
@@ -216,6 +216,36 @@ public class TurtleSoup {
      */
     public static void drawPersonalArt(Turtle turtle) {
         //throw new RuntimeException("implement me!");
+        for(int i = 0; i < 1000; i++) {
+
+            if(i<24) {
+                turtle.forward(100);
+                turtle.turn(100);
+                turtle.color(PenColor.YELLOW);
+            }
+            else if(i<48&&i>=24) {
+                turtle.forward(150);
+                turtle.turn(100);
+                turtle.color(PenColor.MAGENTA);
+            }
+            else if(i<72&&i>=48) {
+                turtle.forward(200);
+                turtle.turn(100);
+                turtle.color(PenColor.RED);
+            }
+
+            else if(i<96&&i>=72){
+                turtle.forward(250);
+                turtle.turn(100);
+                turtle.color(PenColor.ORANGE);
+            }
+            else {
+                turtle.forward(300);
+                turtle.turn(100);
+                turtle.color(PenColor.PINK);
+            }
+
+        }
 
 
     }
@@ -231,7 +261,8 @@ public class TurtleSoup {
         DrawableTurtle turtle = new DrawableTurtle();
 
         //drawSquare(turtle, 40);
-        drawRegularPolygon(turtle,5,100);
+        //drawRegularPolygon(turtle,5,100);
+        drawPersonalArt(turtle);
 
         // draw the window
         turtle.draw();
