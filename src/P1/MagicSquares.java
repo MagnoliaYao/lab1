@@ -16,6 +16,7 @@ public class MagicSquares {
             boolean Answer = isLegalMagicSquare(i + ".txt");
             System.out.println(Answer);
         }
+        System.out.print("请输入需要创建的nxn幻方的n值：");
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         while (n <= 0 || n % 2 == 0) {
@@ -23,15 +24,14 @@ public class MagicSquares {
             n = sc.nextInt();
         }
         generateMagicSquare(n);
-        System.out.println("6" + " " + String.valueOf(isLegalMagicSquare("src/P1/txt/" + "6" + ".txt")));
+        System.out.println("6.txt" + " is " + String.valueOf(isLegalMagicSquare("6" + ".txt")));
         return;
     }
 
     public static boolean isLegalMagicSquare(String fileName) {
-       //行，列 //由于开数组不确定txt文件的大小，所以使用ArrayList
         int diagonal = 0,rDiagonal = 0;
-        String root = System.getProperty("user.dir");
-        String filePath = root + File.separator + "P1" + File.separator + "txt" + File.separator + fileName; //"+File.separator+"表示适应系统的文件分隔符（linux、Windows不同）
+        //String root = System.getProperty("user.dir");
+        String filePath = "src" + File.separator + "P1" + File.separator + "txt" + File.separator + fileName; //"+File.separator+"表示适应系统的文件分隔符（linux、Windows不同）
         ArrayList<String> arrayList = new ArrayList<>();
         try {
             File file = new File(filePath);
@@ -52,24 +52,25 @@ public class MagicSquares {
         int width = arrayList.get(0).split("\t").length;
         int array[][] = new int[length][width];
         for (int i = 0; i < length; i++) {
-            if (arrayList.get(i).split(" ") != null) {
-                System.out.println("不是幻方");
-                return false;
-            }
-                if (arrayList.get(i).split("-") != null || arrayList.get(i).split("\\.") != null) {
-                    System.out.println("不是幻方");
+            String[] a = arrayList.get(i).split("-");
+                if (arrayList.get(i).split("-") .length!= 1 || arrayList.get(i).split("\\.") .length!=1) {
+                    System.out.print(fileName+"不是幻方 ");
                     return false;
                 }
         }
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
                 String s = arrayList.get(i).split("\t")[j];
+                if(arrayList.get(i).split("\t").length<width) {
+                    System.out.print(fileName + "不是幻方 ");
+                    return false;
+                }
                 array[i][j] = Integer.parseInt(s);
             }
-        }
-        if(length!=width){
-            System.out.println("不是幻方");
-            return false;
+            if(length!=width) {
+                System.out.print(fileName+"不是幻方 ");
+                return false;
+            }
         }
 
 
@@ -78,21 +79,20 @@ public class MagicSquares {
             for (int j = 0; j < width; j++) {
                 row[i] += array[i][j];  //每行的和
                 row[i+width] += array[j][i];  //每列的行
-                diagonal += array[i][i];  //正对角线
-                rDiagonal += array[i][length-i-1];  //反对角线
              }
+            diagonal += array[i][i];  //正对角线
+            rDiagonal += array[i][length-i-1];  //反对角线
         }
         for (int i = 0; i < row.length; i++) {
             if (row[i] == row[0] && diagonal == rDiagonal && row[0] == diagonal) {
-                System.out.println("是幻方");
+//                System.out.println(fileName+ "是幻方");
                 return true;
             }
             else{
-                System.out.println("不是幻方");
+//                System.out.println(fileName+"不是幻方");
                 return false;
             }
         }
-
 
        return true;
     }
