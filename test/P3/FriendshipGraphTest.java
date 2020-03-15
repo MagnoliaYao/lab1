@@ -55,13 +55,11 @@ public class FriendshipGraphTest {
         Person c = new Person("C");
         Person d = new Person("D");
         Person e = new Person("E");
-
         graph.addVertex(a);
         graph.addVertex(b);
         graph.addVertex(c);
         graph.addVertex(d);
         graph.addVertex(e);
-
         graph.addEdge(a,b);
         graph.addEdge(b,a);
         graph.addEdge(b,d);

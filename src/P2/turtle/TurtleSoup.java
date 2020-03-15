@@ -265,7 +265,6 @@ public class TurtleSoup {
         //drawSquare(turtle, 40);
         //drawRegularPolygon(turtle,5,100);
         drawPersonalArt(turtle);
-
         // draw the window
         turtle.draw();
     }
