@@ -30,8 +30,8 @@ public class MagicSquares {
 
     public static boolean isLegalMagicSquare(String fileName) {
         int diagonal = 0,rDiagonal = 0;
-        //String root = System.getProperty("user.dir");
-        String filePath = "src" + File.separator + "P1" + File.separator + "txt" + File.separator + fileName; //"+File.separator+"表示适应系统的文件分隔符（linux、Windows不同）
+        String root = System.getProperty("user.dir");
+        String filePath = root + File.separator+"src" + File.separator + "P1" + File.separator + "txt" + File.separator + fileName; //"+File.separator+"表示适应系统的文件分隔符（linux、Windows不同）
         ArrayList<String> arrayList = new ArrayList<>();
         try {
             File file = new File(filePath);
