@@ -4,19 +4,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-* 1.判断是否是幻方
-*    1.1 行列数是否相同
-*    1.2 矩阵数字是否都是正整数
-*    1.3  数字之间分隔符是不是\t
-* */
+
 public class MagicSquares {
     public static void main(String[] args) throws IOException {
         for (int i = 1; i <= 5; i++) {
             boolean Answer = isLegalMagicSquare(i + ".txt");
             System.out.println(Answer);
         }
-        System.out.print("请输入需要创建的nxn幻方的n值：");
+        System.out.print("please input the n from nxn magic square:");
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         while (n <= 0 || n % 2 == 0) {
@@ -54,7 +49,7 @@ public class MagicSquares {
         for (int i = 0; i < length; i++) {
             String[] a = arrayList.get(i).split("-");
                 if (arrayList.get(i).split("-") .length!= 1 || arrayList.get(i).split("\\.") .length!=1) {
-                    System.out.print(fileName+"不是幻方 ");
+                    System.out.print(fileName+" is not a magic square ");
                     return false;
                 }
         }
@@ -62,13 +57,13 @@ public class MagicSquares {
             for (int j = 0; j < width; j++) {
                 String s = arrayList.get(i).split("\t")[j];
                 if(arrayList.get(i).split("\t").length<width) {
-                    System.out.print(fileName + "不是幻方 ");
+                    System.out.print(fileName + " is not a magic square ");
                     return false;
                 }
                 array[i][j] = Integer.parseInt(s);
             }
             if(length!=width) {
-                System.out.print(fileName+"不是幻方 ");
+                System.out.print(fileName+" is not a magic square ");
                 return false;
             }
         }
